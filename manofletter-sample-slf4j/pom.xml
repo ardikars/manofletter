@@ -1,27 +1,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>bytebuddy-example</artifactId>
-        <groupId>bytebuddy-example</groupId>
+        <artifactId>manofletter</artifactId>
+        <groupId>manofletter</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>manofletter-sample</artifactId>
+    <artifactId>manofletter-sample-slf4j</artifactId>
     <packaging>jar</packaging>
 
     <name>${project.artifactId}</name>
 
     <dependencies>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j.version}</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.11.1</version>
         </dependency>
     </dependencies>
 
@@ -33,7 +28,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>manofletter.sample.Main</mainClass>
+                            <mainClass>manofletter.sample.slf4j.Slf4jSample</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -49,6 +44,19 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <configuration>
+                    <executable>java</executable>
+                    <arguments>
+                        <argument>-javaagent:manofletter-agent/target/manofletter-agent.jar</argument>
+                        <argument>-classpath</argument>
+                        <classpath/>
+                        <argument>manofletter.sample.slf4j.Slf4jSample</argument>
+                    </arguments>
+                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -11,9 +11,11 @@ import net.bytebuddy.implementation.bind.annotation.This;
 import net.bytebuddy.matcher.ElementMatcher;
 
 import java.lang.reflect.Method;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 
 /**
@@ -100,7 +102,7 @@ public class ManofletterInterceptor {
             defaultFilter = null;
         }
         DEFAULT_FILTER = defaultFilter;
-        FILTERS = new ConcurrentSkipListSet<Filter>();
+        FILTERS = new HashSet<Filter>();
     }
 
 }

@@ -30,7 +30,7 @@ public class Slf4jFilter extends AbstractFilter {
             if (parameterTypes[0].isAssignableFrom(marker)) {
                 tuple = MessageFormatter.arrayFormat((String) arguments[1], Arrays.copyOfRange(arguments, 2, arguments.length - 1));
             } else {
-                if (parameterTypes[1].isAssignableFrom(Throwable.class)) {
+                if (parameterTypes[1] == null) {
                     tuple = MessageFormatter.arrayFormat((String) arguments[0], EMPTY_OBJECT_ARRAY, (Throwable) arguments[1]);
                 } else {
                     tuple = MessageFormatter.arrayFormat((String) arguments[1], Arrays.copyOfRange(arguments, 1, arguments.length - 1));
