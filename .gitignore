@@ -1,3 +1,11 @@
+
+# Generated files
+manofletter-agent/dependency-reduced-pom.xml
+
+# Maven files
+manofletter-agent/target
+manofletter-sample-slf4j/target
+
 # Compiled class file
 *.class
 
@@ -10,6 +18,8 @@
 # Injellij Idea files
 *.iml
 .idea
+manofletter-agent/out
+manofletter-sample-slf4j/out
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

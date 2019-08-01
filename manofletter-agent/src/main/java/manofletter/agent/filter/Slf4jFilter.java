@@ -16,7 +16,7 @@ import java.util.concurrent.Callable;
  */
 public class Slf4jFilter extends AbstractFilter {
 
-    private Class marker = Class.forName("org.slf4j.Marker");
+    private Class<?> marker = Class.forName("org.slf4j.Marker");
 
     public Slf4jFilter(String clazz) throws ClassNotFoundException {
         super(clazz);
@@ -24,13 +24,16 @@ public class Slf4jFilter extends AbstractFilter {
 
     @Override
     public boolean check(Callable<?> callable, Method method, Object[] arguments) throws Exception {
-        Class[] parameterTypes = method.getParameterTypes();
         FormattingTuple tuple;
-        if (parameterTypes.length > 1) {
-            if (parameterTypes[0].isAssignableFrom(marker)) {
-                tuple = MessageFormatter.arrayFormat((String) arguments[1], Arrays.copyOfRange(arguments, 2, arguments.length - 1));
+        if (arguments.length > 1) {
+            if (arguments[0].getClass().isAssignableFrom(marker)) {
+                if (arguments[1] instanceof Throwable) {
+                    tuple = MessageFormatter.arrayFormat((String) arguments[1], EMPTY_OBJECT_ARRAY, (Throwable) arguments[2]);
+                } else {
+                    tuple = MessageFormatter.arrayFormat((String) arguments[3], Arrays.copyOfRange(arguments, 2, arguments.length - 2));
+                }
             } else {
-                if (parameterTypes[1] == null) {
+                if (arguments[1] instanceof Throwable) {
                     tuple = MessageFormatter.arrayFormat((String) arguments[0], EMPTY_OBJECT_ARRAY, (Throwable) arguments[1]);
                 } else {
                     tuple = MessageFormatter.arrayFormat((String) arguments[1], Arrays.copyOfRange(arguments, 1, arguments.length - 1));
