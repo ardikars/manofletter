@@ -1,5 +1,8 @@
 package manofletter.agent.filter;
 
+import manofletter.agent.logging.Logger;
+import manofletter.agent.logging.LoggerFactory;
+
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -13,13 +16,15 @@ import java.util.concurrent.Callable;
  */
 public class DefaultFilter extends AbstractFilter {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultFilter.class);
+
     public DefaultFilter() throws ClassNotFoundException {
         super(null);
     }
 
     @Override
     public boolean check(Callable<?> callable, Method method, Object[] arguments) throws Exception {
-        System.out.println("***Default filter intercepted***");
+        LOGGER.info("Intercepted...");
         return false;
     }
 

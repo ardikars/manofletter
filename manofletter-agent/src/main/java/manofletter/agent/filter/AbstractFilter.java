@@ -3,6 +3,8 @@ package manofletter.agent.filter;
 import com.google.re2j.Matcher;
 import com.google.re2j.Pattern;
 import manofletter.agent.ManofletterProperties;
+import manofletter.agent.logging.Logger;
+import manofletter.agent.logging.LoggerFactory;
 import manofletter.agent.util.Properties;
 
 /**
@@ -11,6 +13,8 @@ import manofletter.agent.util.Properties;
  * @author <a href="mailto:contact@ardikars.com">Ardika Rommy Sanjaya</a>
  */
 abstract class AbstractFilter implements Filter {
+
+    private static final Logger LOGGER;
 
     protected static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
 
@@ -24,6 +28,7 @@ abstract class AbstractFilter implements Filter {
         } else {
             this.type = Void.class;
         }
+        LOGGER.debug("Class type : {}", clazz);
     }
 
     @Override
@@ -36,9 +41,11 @@ abstract class AbstractFilter implements Filter {
     }
 
     static {
-        String regex = Properties.getProperty(ManofletterProperties.FILTER, "");
+        LOGGER = LoggerFactory.getLogger(AbstractFilter.class);
+        String regex = Properties.getProperty(ManofletterProperties.FILTER_KEY, "");
         Pattern pattern = Pattern.compile(regex);
         REGEX = pattern;
+        LOGGER.debug("Regex : {}", regex);
     }
 
 }

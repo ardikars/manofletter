@@ -72,9 +72,7 @@ public final class Properties {
                 });
             }
         } catch (SecurityException e) {
-            if (ManofletterProperties.DEBUG) {
 
-            }
         }
         if (value != null) {
             return value;

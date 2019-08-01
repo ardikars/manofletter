@@ -4,7 +4,8 @@ import manofletter.agent.filter.Filter;
 import manofletter.agent.filter.Log4j2Filter;
 import manofletter.agent.filter.DefaultFilter;
 import manofletter.agent.filter.Slf4jFilter;
-import manofletter.agent.util.DebugHelper;
+import manofletter.agent.logging.Logger;
+import manofletter.agent.logging.LoggerFactory;
 import manofletter.agent.util.Properties;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.description.type.TypeDescription;
@@ -25,6 +26,8 @@ import java.util.Set;
  * @author <a href="mailto:contact@ardikars.com">Ardika Rommy Sanjaya</a>
  */
 public class ManofletterAgent {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ManofletterAgent.class);
 
     public static void premain(String arguments, Instrumentation instrumentation) throws ClassNotFoundException {
         final ManofletterInterceptor interceptor = interceptor();
@@ -81,13 +84,9 @@ public class ManofletterAgent {
                 set.add(methods.trim());
             }
         }
-        if (ManofletterProperties.DEBUG) {
-            DebugHelper.log("Type      : " + junction);
-            DebugHelper.log("Methods   : " + set);
-            for (Filter filter : ManofletterInterceptor.FILTERS) {
-                DebugHelper.log("Filter    : " + filter);
-            }
-        }
+        LOGGER.debug("Type     : {}", junction.toString());
+        LOGGER.debug("Methods  : {}", set.toString());
+        LOGGER.debug("Filters  : {}", ManofletterInterceptor.FILTERS.toString());
         return new ManofletterInterceptor(junction, methods(set));
     }
 
