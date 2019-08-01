@@ -15,7 +15,7 @@ public interface ManofletterProperties {
     String METHODS_KEY = "manofletter.methods";
     String FILTER = "manofletter.filter";
     String SL4J_LOGGER = "org.slf4j.Logger";
-    String LOG4J2_LOGGER = "org.apache.log4j.Logger";
+    String LOG4J2_LOGGER = "org.apache.logging.log4j.Logger";
 
     boolean DEBUG = Boolean.parseBoolean(Properties.getProperty("manofletter.debug", "false"));
     boolean DEFAULT = Properties.getProperty(LOGGERS_KEY, null) == null;

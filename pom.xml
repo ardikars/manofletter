@@ -8,6 +8,7 @@
     <modules>
         <module>manofletter-agent</module>
         <module>manofletter-sample-slf4j</module>
+        <module>manofletter-sample-log4j2</module>
     </modules>
     <packaging>pom</packaging>
 

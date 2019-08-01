@@ -1,21 +1,22 @@
-package manofletter.sample.slf4j;
+package manofletter.sample.log4j2;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Marker;
-import org.slf4j.MarkerFactory;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 
 /**
  *
  *
  * @author <a href="mailto:contact@ardikars.com">Ardika Rommy Sanjaya</a>
  */
-public class Slf4jSample {
+public class Log4j2Sample {
 
-    public static Logger LOGGER = LoggerFactory.getLogger(Slf4jSample.class);
+    public static Logger LOGGER = LogManager.getLogger(Log4j2Sample.class);
 
     public static void main(String[] args) {
-        Marker marker = MarkerFactory.getMarker("manofletterMarker");
+        Marker marker = MarkerManager.getMarker("manofletterMarker");
         LOGGER.info(marker, "Manofletter marker {}", "1");
         LOGGER.info(marker, "Manofletter marker throw some exception", new IllegalArgumentException("IAE"));
         LOGGER.info("Manofletter throw some exception", new IllegalArgumentException("WTF"));

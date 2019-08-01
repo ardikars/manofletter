@@ -7,7 +7,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>manofletter-sample-slf4j</artifactId>
+    <artifactId>manofletter-sample-log4j2</artifactId>
     <packaging>jar</packaging>
 
     <name>${project.artifactId}</name>
@@ -15,7 +15,12 @@
     <dependencies>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.11.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
             <version>2.11.1</version>
         </dependency>
     </dependencies>
@@ -28,7 +33,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>manofletter.sample.log4j2.Slf4jSample</mainClass>
+                            <mainClass>manofletter.sample.log4j2.Log4j2Sample</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -54,7 +59,7 @@
                         <argument>-javaagent:manofletter-agent/target/manofletter-agent.jar</argument>
                         <argument>-classpath</argument>
                         <classpath/>
-                        <argument>manofletter.sample.log4j2.Slf4jSample</argument>
+                        <argument>manofletter.sample.log4j2.Log4j2Sample</argument>
                     </arguments>
                 </configuration>
             </plugin>

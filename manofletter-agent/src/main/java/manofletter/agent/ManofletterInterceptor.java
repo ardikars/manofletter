@@ -42,10 +42,12 @@ public class ManofletterInterceptor {
                                  @AllArguments Object[] arguments,
                                  @SuperCall Callable<?> callable) throws Exception {
         if (ManofletterProperties.DEBUG) {
-            DebugHelper.log("Logger    : " + logger);
-            DebugHelper.log("Method    : " + method);
-            DebugHelper.log("Arguments : " + logger);
-            DebugHelper.log("Callable  : " + callable);
+            DebugHelper.log("Default        : " + ManofletterProperties.DEFAULT);
+            DebugHelper.log("Default filter : " + DEFAULT_FILTER);
+            DebugHelper.log("Logger         : " + logger);
+            DebugHelper.log("Method         : " + method);
+            DebugHelper.log("Arguments      : " + logger);
+            DebugHelper.log("Callable       : " + callable);
         }
         Filter filter;
         if (ManofletterProperties.DEFAULT) {
@@ -71,6 +73,13 @@ public class ManofletterInterceptor {
     private static Filter findFilter(Object logger) {
         if (DEFAULT_FILTER != null) {
             return DEFAULT_FILTER;
+        }
+        if (ManofletterProperties.DEBUG) {
+            StringBuilder sb = new StringBuilder();
+            for (Filter filter : FILTERS) {
+                sb.append(filter.type().getName());
+            }
+            DebugHelper.log("Registered filter: " + sb.toString());
         }
         Filter filter = null;
         Iterator<Filter> iterator = FILTERS.iterator();
