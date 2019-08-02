@@ -30,13 +30,13 @@ public class Slf4jFilter extends AbstractFilter {
                 if (arguments[1] instanceof Throwable) {
                     tuple = MessageFormatter.arrayFormat((String) arguments[1], EMPTY_OBJECT_ARRAY, (Throwable) arguments[2]);
                 } else {
-                    tuple = MessageFormatter.arrayFormat((String) arguments[3], Arrays.copyOfRange(arguments, 2, arguments.length - 2));
+                    tuple = MessageFormatter.arrayFormat((String) arguments[1], Arrays.copyOfRange(arguments, 2, arguments.length - 1));
                 }
             } else {
                 if (arguments[1] instanceof Throwable) {
                     tuple = MessageFormatter.arrayFormat((String) arguments[0], EMPTY_OBJECT_ARRAY, (Throwable) arguments[1]);
                 } else {
-                    tuple = MessageFormatter.arrayFormat((String) arguments[1], Arrays.copyOfRange(arguments, 1, arguments.length - 1));
+                    tuple = MessageFormatter.arrayFormat((String) arguments[0], Arrays.copyOfRange(arguments, 1, arguments.length - 1));
                 }
             }
         } else {
