@@ -28,7 +28,9 @@ abstract class AbstractFilter implements Filter {
         } else {
             this.type = Void.class;
         }
-        LOGGER.debug("Class type : {}", clazz);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Class type : {}", clazz);
+        }
     }
 
     @Override
@@ -45,7 +47,9 @@ abstract class AbstractFilter implements Filter {
         String regex = Properties.getProperty(ManofletterProperties.FILTER_KEY, "");
         Pattern pattern = Pattern.compile(regex);
         REGEX = pattern;
-        LOGGER.debug("Regex : {}", regex);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Regex : {}", regex);
+        }
     }
 
 }

@@ -21,9 +21,29 @@ abstract class AbstractLogger implements Logger {
     }
 
     @Override
+    public boolean isDebugEnabled() {
+        return LEVEL == LEVEL.DEBUG;
+    }
+
+    @Override
+    public boolean isInfoEnabled() {
+        return LEVEL == Level.INFO || LEVEL == Level.DEBUG;
+    }
+
+    @Override
+    public boolean isWarnEnabled() {
+        return LEVEL == Level.DEBUG || LEVEL == Level.INFO || LEVEL == Level.WARN;
+    }
+
+    @Override
+    public boolean isErrorEnabled() {
+        return LEVEL == Level.ERROR || LEVEL == Level.DEBUG || LEVEL == Level.INFO || LEVEL == Level.WARN;
+    }
+
+    @Override
     public void debug(CharSequence message) {
         if (message != null) {
-            if (LEVEL == LEVEL.DEBUG) {
+            if (isDebugEnabled()) {
                 log("[DEBUG] : " + message.toString());
             }
         }
@@ -32,7 +52,7 @@ abstract class AbstractLogger implements Logger {
     @Override
     public void debug(CharSequence format, CharSequence argument) {
         if (format != null || argument != null) {
-            if (LEVEL == LEVEL.DEBUG) {
+            if (isDebugEnabled()) {
                 FormattingTuple tuple = MessageFormatter.format(format.toString(), argument);
                 log("[DEBUG] : " + tuple.getMessage());
             }
@@ -42,7 +62,7 @@ abstract class AbstractLogger implements Logger {
     @Override
     public void debug(CharSequence format, CharSequence[] arguments) {
         if (format != null || (arguments != null && arguments.length > 0)) {
-            if (LEVEL == LEVEL.DEBUG) {
+            if (isDebugEnabled()) {
                 FormattingTuple tuple = MessageFormatter.arrayFormat(format.toString(), arguments);
                 log("[DEBUG] : " + tuple.getMessage());
             }
@@ -52,7 +72,7 @@ abstract class AbstractLogger implements Logger {
     @Override
     public void info(CharSequence message) {
         if (message != null) {
-            if (LEVEL == Level.INFO || LEVEL == Level.DEBUG) {
+            if (isInfoEnabled()) {
                 log("[INFO] : " + message.toString());
             }
         }
@@ -61,7 +81,7 @@ abstract class AbstractLogger implements Logger {
     @Override
     public void info(CharSequence format, CharSequence argument) {
         if (format != null || argument != null) {
-            if (LEVEL == Level.INFO || LEVEL == Level.DEBUG) {
+            if (isInfoEnabled()) {
                 FormattingTuple tuple = MessageFormatter.format(format.toString(), argument);
                 log("[INFO] : " + tuple.getMessage());
             }
@@ -71,7 +91,7 @@ abstract class AbstractLogger implements Logger {
     @Override
     public void info(CharSequence format, CharSequence[] arguments) {
         if (format != null || (arguments != null && arguments.length > 0)) {
-            if (LEVEL == Level.INFO || LEVEL == Level.DEBUG) {
+            if (isInfoEnabled()) {
                 FormattingTuple tuple = MessageFormatter.arrayFormat(format.toString(), arguments);
                 log("[INFO] : " + tuple.getMessage());
             }
@@ -81,7 +101,7 @@ abstract class AbstractLogger implements Logger {
     @Override
     public void warn(CharSequence message) {
         if (message != null) {
-            if (LEVEL == Level.DEBUG || LEVEL == Level.INFO || LEVEL == Level.WARN) {
+            if (isWarnEnabled()) {
                 log("[WARN] : " + message.toString());
             }
         }
@@ -90,7 +110,7 @@ abstract class AbstractLogger implements Logger {
     @Override
     public void warn(CharSequence format, CharSequence argument) {
         if (format != null || argument != null) {
-            if (LEVEL == Level.DEBUG || LEVEL == Level.INFO || LEVEL == Level.WARN) {
+            if (isWarnEnabled()) {
                 FormattingTuple tuple = MessageFormatter.format(format.toString(), argument);
                 log("[WARN] : " + tuple.getMessage());
             }
@@ -100,7 +120,7 @@ abstract class AbstractLogger implements Logger {
     @Override
     public void warn(CharSequence format, CharSequence[] arguments) {
         if (format != null || (arguments != null && arguments.length > 0)) {
-            if (LEVEL == Level.DEBUG || LEVEL == Level.INFO || LEVEL == Level.WARN) {
+            if (isWarnEnabled()) {
                 FormattingTuple tuple = MessageFormatter.arrayFormat(format.toString(), arguments);
                 log("[WARN] : " + tuple.getMessage());
             }
@@ -110,7 +130,7 @@ abstract class AbstractLogger implements Logger {
     @Override
     public void error(CharSequence message) {
         if (message != null) {
-            if (LEVEL == Level.ERROR || LEVEL == Level.DEBUG || LEVEL == Level.INFO || LEVEL == Level.WARN) {
+            if (isErrorEnabled()) {
                 log("[ERROR] : " + message.toString());
             }
         }
@@ -119,7 +139,7 @@ abstract class AbstractLogger implements Logger {
     @Override
     public void error(CharSequence format, CharSequence argument) {
         if (format != null || argument != null) {
-            if (LEVEL == Level.ERROR || LEVEL == Level.DEBUG || LEVEL == Level.INFO || LEVEL == Level.WARN) {
+            if (isErrorEnabled()) {
                 FormattingTuple tuple = MessageFormatter.format(format.toString(), argument);
                 log("[ERROR] : " + tuple.getMessage());
             }
@@ -129,7 +149,7 @@ abstract class AbstractLogger implements Logger {
     @Override
     public void error(CharSequence format, CharSequence[] arguments) {
         if (format != null || (arguments != null && arguments.length > 0)) {
-            if (LEVEL == Level.ERROR || LEVEL == Level.DEBUG || LEVEL == Level.INFO || LEVEL == Level.WARN) {
+            if (isErrorEnabled()) {
                 FormattingTuple tuple = MessageFormatter.arrayFormat(format.toString(), arguments);
                 log("[ERROR] : " + tuple.getMessage());
             }

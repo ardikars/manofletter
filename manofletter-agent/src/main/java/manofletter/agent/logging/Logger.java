@@ -7,6 +7,14 @@ package manofletter.agent.logging;
  */
 public interface Logger {
 
+    boolean isDebugEnabled();
+
+    boolean isInfoEnabled();
+
+    boolean isWarnEnabled();
+
+    boolean isErrorEnabled();
+
     void debug(CharSequence message);
 
     void info(CharSequence message);

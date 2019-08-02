@@ -43,10 +43,12 @@ public class ManofletterInterceptor {
                                  @Origin Method method,
                                  @AllArguments Object[] arguments,
                                  @SuperCall Callable<?> callable) throws Exception {
-        LOGGER.debug("Logger Type           : {}", logger.toString());
-        LOGGER.debug("Method                : {}", method.toString());
-        LOGGER.debug("Arguments             : {}", Arrays.asList(arguments).toString());
-        LOGGER.debug("Callable              : {}", callable.toString());
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Logger Type           : {}", logger.toString());
+            LOGGER.debug("Method                : {}", method.toString());
+            LOGGER.debug("Arguments             : {}", Arrays.asList(arguments).toString());
+            LOGGER.debug("Callable              : {}", callable.toString());
+        }
         Filter filter;
         if (ManofletterProperties.DEFAULT) {
             filter = DEFAULT_FILTER;
@@ -104,7 +106,9 @@ public class ManofletterInterceptor {
         }
         DEFAULT_FILTER = defaultFilter;
         FILTERS = new HashSet<Filter>();
-        LOGGER.debug("Default Configuration : {}", String.valueOf(ManofletterProperties.DEFAULT));
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Default Configuration : {}", String.valueOf(ManofletterProperties.DEFAULT));
+        }
     }
 
 }

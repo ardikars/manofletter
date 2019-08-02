@@ -15,7 +15,7 @@ public class Slf4jTest {
     @Before
     public void premain() throws ClassNotFoundException {
         System.setProperty("manofletter.loggers", Logger.class.getName());
-        System.setProperty("manofletter.methods", "debug,warn"); // add info if you want to filter 'password' regex on info method
+        System.setProperty("manofletter.methods", "debug,warn"); // add info if you want to enable 'password' regex filter on info method
         System.setProperty("manofletter.filter", "password");
         System.setProperty("manofletter.logging.level", "INFO");
         ManofletterAgent.premain(null, ByteBuddyAgent.install());

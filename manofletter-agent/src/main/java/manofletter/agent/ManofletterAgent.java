@@ -84,9 +84,11 @@ public class ManofletterAgent {
                 set.add(methods.trim());
             }
         }
-        LOGGER.debug("Type     : {}", junction.toString());
-        LOGGER.debug("Methods  : {}", set.toString());
-        LOGGER.debug("Filters  : {}", ManofletterInterceptor.FILTERS.toString());
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Type     : {}", junction.toString());
+            LOGGER.debug("Methods  : {}", set.toString());
+            LOGGER.debug("Filters  : {}", ManofletterInterceptor.FILTERS.toString());
+        }
         return new ManofletterInterceptor(junction, methods(set));
     }
 
