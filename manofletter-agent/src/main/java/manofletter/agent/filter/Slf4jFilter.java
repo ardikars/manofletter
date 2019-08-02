@@ -16,7 +16,7 @@ import java.util.concurrent.Callable;
  */
 public class Slf4jFilter extends AbstractFilter {
 
-    private Class<?> marker = Class.forName("org.slf4j.Marker");
+    private Class<?> MARKER = Class.forName("org.slf4j.Marker");
 
     public Slf4jFilter(String clazz) throws ClassNotFoundException {
         super(clazz);
@@ -26,7 +26,7 @@ public class Slf4jFilter extends AbstractFilter {
     public boolean check(Callable<?> callable, Method method, Object[] arguments) throws Exception {
         FormattingTuple tuple;
         if (arguments.length > 1) {
-            if (arguments[0].getClass().isAssignableFrom(marker)) {
+            if (MARKER.isInstance(arguments[0])) {
                 if (arguments[1] instanceof Throwable) {
                     tuple = MessageFormatter.arrayFormat((String) arguments[1], EMPTY_OBJECT_ARRAY, (Throwable) arguments[2]);
                 } else {

@@ -93,14 +93,16 @@ public class ManofletterAgent {
     }
 
     private static ElementMatcher.Junction type(Set<Filter> filters, String clazz) throws ClassNotFoundException {
+        ElementMatcher.Junction junction = ElementMatchers.isSubTypeOf(Class.forName(clazz));
         if (clazz.equals(ManofletterProperties.SL4J_LOGGER)) {
             filters.add(new Slf4jFilter(ManofletterProperties.SL4J_LOGGER));
         } else if (clazz.equals(ManofletterProperties.LOG4J2_LOGGER)) {
             filters.add(new Log4j2Filter(ManofletterProperties.LOG4J2_LOGGER));
+            junction = junction.and(ElementMatchers.isAbstract());
         } else {
             filters.add(new DefaultFilter());
         }
-        return ElementMatchers.isSubTypeOf(Class.forName(clazz));
+        return junction;
     }
 
     private static ElementMatcher.Junction methods(Set<String> methods) {
